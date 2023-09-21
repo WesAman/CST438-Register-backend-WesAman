@@ -17,7 +17,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.cst438.domain.ScheduleDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-/* 
+/*
  * Example of using Junit 
  * Mockmvc is used to test a simulated REST call to the RestController
  */
