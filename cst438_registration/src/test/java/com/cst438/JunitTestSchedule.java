@@ -1,9 +1,6 @@
 package com.cst438;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +20,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 @SpringBootTest
 @AutoConfigureMockMvc
-public class JunitTestSchedule {
+class JunitTestSchedule {
 
 	@Autowired
 	private MockMvc mvc;
 
-	/*
-	 * add course 40442 to student test@csumb.edu in schedule Fall 2021
-	 */
-	@Test
-	public void addCourse()  throws Exception {
+    /*
+     * add course 40442 to student test@csumb.edu in schedule Fall 2021
+     */
+    @Test
+    void addCourse()  throws Exception {
 		
 		MockHttpServletResponse response;
 
@@ -73,11 +70,12 @@ public class JunitTestSchedule {
 		assertEquals(true, found, "Added course not in updated schedule.");
 		
 	}
-	/*
-	 * drop course 30157 Fall 2020 from student test@csumb.edu
-	 */
-	@Test
-	public void dropCourse()  throws Exception {
+
+    /*
+     * drop course 30157 Fall 2020 from student test@csumb.edu
+     */
+    @Test
+    void dropCourse()  throws Exception {
 		
 		MockHttpServletResponse response;
 		

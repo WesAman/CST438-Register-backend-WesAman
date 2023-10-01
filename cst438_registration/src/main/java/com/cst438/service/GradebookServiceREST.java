@@ -41,7 +41,7 @@ public class GradebookServiceREST implements GradebookService {
 	 */
 	@PutMapping("/course/{course_id}")
 	@Transactional
-	public void updateCourseGrades( @RequestBody FinalGradeDTO[] grades, @PathVariable("course_id") int course_id) {
+	public void updateCourseGrades( @RequestBody FinalGradeDTO[] grades, @PathVariable int course_id) {
 		System.out.println("Grades received "+grades.length);
 		
 		//TODO update grades in enrollment records with grades received from gradebook service

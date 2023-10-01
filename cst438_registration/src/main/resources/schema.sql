@@ -1,6 +1,6 @@
-CREATE TABLE course (
-  year int  NOT NULL,
-  semester varchar(10) NOT NULL,
+create table course ( 
+  year integer  not null,
+  semester varchar(10) not null,
   course_id int  NOT NULL,
   section int  NOT NULL,
   title varchar(255) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE course (
   PRIMARY KEY (course_id)
 );
 
-CREATE TABLE student (
+create table student (
   student_id int  NOT NULL AUTO_INCREMENT,
   name varchar(255) NOT NULL,
   email varchar(255) NOT NULL UNIQUE,
@@ -22,7 +22,7 @@ CREATE TABLE student (
   PRIMARY KEY (student_id)
 );
 
-CREATE TABLE enrollment (
+create table enrollment (
   enrollment_id int NOT NULL AUTO_INCREMENT,
   student_id int  NOT NULL,
   year int NOT NULL,
@@ -33,4 +33,3 @@ CREATE TABLE enrollment (
   FOREIGN KEY (course_id) REFERENCES course (course_id) on delete cascade, 
   FOREIGN KEY (student_id) REFERENCES student (student_id) on delete cascade 
 );
-
