@@ -1,9 +1,11 @@
-INSERT INTO student VALUES 
+
+insert into student VALUES 
 (1,'test','test@csumb.edu',NULL,0),
 (2,'david','dwisneski@csumb.edu',NULL,0),
 (3,'tom', 'trebold@csumb.edu', NULL, 0);
 
-INSERT INTO course VALUES 
+
+insert into course VALUES 
 (2020,'Fall',30157,1,'BUS 203 - Financial Accounting','We 6:00PM - 7:20PM','506','112','cchou@csumb.edu','2020-08-24','2020-12-13'),
 (2020,'Fall',30163,1,'BUS 306 - Fundamentals of Marketing','Mo 11:00AM - 11:50AM','Library','1180','anariswari@csumb.edu','2020-08-24','2020-12-13'),
 (2020,'Fall',30291,1,'BUS 304 - Business Communication, Pro-seminar & Critical Thinking','Mo 8:00AM - 9:50AM','506','108','kposteher@csumb.edu','2020-08-24','2020-12-13'),
