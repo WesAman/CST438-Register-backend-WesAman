@@ -24,7 +24,7 @@ public class GradebookServiceREST implements GradebookService {
 	private RestTemplate restTemplate = new RestTemplate();
 
 	@Value("${gradebook.url}")
-	private static String gradebook_url;
+	String gradebook_url;
 
 	@Override
 	public void enrollStudent(String student_email, String student_name, int course_id) {
