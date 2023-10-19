@@ -1,11 +1,12 @@
 package com.cst438;
 
+import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 
-import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -20,8 +21,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 
 import com.cst438.domain.Course;
 import com.cst438.domain.CourseRepository;
@@ -59,12 +58,12 @@ public class EndToEndScheduleTest {
 	public static final int SLEEP_DURATION = 1000; // 1 second.
 
 
-    /*
-     * add course TEST_COURSE_ID to schedule for 2021 Fall semester.
-     */
-//    @SuppressWarnings("deprecation")
+	/*
+	 * add course TEST_COURSE_ID to schedule for 2021 Fall semester.
+	 */
+	
 	@Test
-    void addCourseTest() throws Exception {
+	public void addCourseTest() throws Exception {
 
 	
 		// set the driver location and start driver
@@ -78,10 +77,7 @@ public class EndToEndScheduleTest {
 		System.setProperty("webdriver.chrome.driver", CHROME_DRIVER_FILE_LOCATION);
 		WebDriver driver = new ChromeDriver();
 		// Puts an Implicit wait for 10 seconds before throwing exception
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // Adjust the timeout as needed
-		WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id("elementId")));
-
-//		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 		try {
 
@@ -121,11 +117,10 @@ public class EndToEndScheduleTest {
 			WebElement dropButton = we.findElement(By.xpath("//button"));
 			assertNotNull(dropButton);
 			dropButton.click();
-			WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10)); // Adjust the timeout as needed
-
+			
 			// the drop course action causes an alert to occur.  
-//			WebDriverWait wait = new WebDriverWait(driver, 1);
-            wait1.until(ExpectedConditions.alertIsPresent());
+			WebDriverWait wait = new WebDriverWait(driver, 1);
+            wait.until(ExpectedConditions.alertIsPresent());
             
             Alert simpleAlert = driver.switchTo().alert();
             simpleAlert.accept();
@@ -138,7 +133,7 @@ public class EndToEndScheduleTest {
 
 		} catch (Exception ex) {
 			throw ex;
-		} finally { 
+		} finally {
 			driver.quit();
 		}
 
