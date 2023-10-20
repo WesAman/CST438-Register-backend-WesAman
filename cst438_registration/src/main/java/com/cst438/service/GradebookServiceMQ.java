@@ -25,25 +25,26 @@ public class GradebookServiceMQ implements GradebookService {
 	@Autowired
 	EnrollmentRepository enrollmentRepository;
 	
-	Queue gradebookQueue = new Queue("gradebook-queue", true);
-	
-	@Bean
-	Queue createQueue() {
-		return new Queue("registration-queue");
-	}
+	Queue gradebookQueue = new Queue("gradebook-queue", true); 
 
+	 @Bean
+
+	 Queue createQueue() {
+
+	 return new Queue("registration-queue");
+
+	 }
 	// send message to grade book service about new student enrollment in course
 	@Override
 	public void enrollStudent(String student_email, String student_name, int course_id) {
 		System.out.println("Start Message "+ student_email +" " + course_id); 
-		// create EnrollmentDTO, convert to JSON string and send to gradebookQueue
-		
+		// create EnrollmentDTO and send to gradebookQueue
 		EnrollmentDTO dto = new EnrollmentDTO(0, student_email, student_name, course_id);
 		String json = asJsonString(dto);
 		System.out.println(json);
 		rabbitTemplate.convertAndSend(gradebookQueue.getName(), json);
 		System.out.println("End Message");  	
-		}
+	}
 	
 	@RabbitListener(queues = "registration-queue")
 	@Transactional
@@ -53,9 +54,6 @@ public class GradebookServiceMQ implements GradebookService {
 		 * for each student grade in courseDTOG,  find the student enrollment 
 		 * entity and update the grade.
 		 */
-		
-		// deserialize the string message to FinalGradeDTO[] 
-		
 		FinalGradeDTO[] grades = fromJsonString(message, FinalGradeDTO[].class);
 		System.out.println("Grades received "+grades.length);
 		for (FinalGradeDTO dto: grades) {
@@ -65,7 +63,6 @@ public class GradebookServiceMQ implements GradebookService {
 				enrollmentRepository.save(enrollment);
 			}
 		}
-
 	}
 	
 	private static String asJsonString(final Object obj) {
