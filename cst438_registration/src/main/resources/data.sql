@@ -25,3 +25,8 @@ insert into enrollment values
 (5, 3, 2020, 'Fall', 31045, null),
 (6, 1, 2021, 'Fall', 40443, null),
 (7, 3, 2021, 'Fall', 40443, null);
+
+insert into user_table
+(username, password, role) values 
+('user@csumb.edu', '$2a$10$NVM0n8ElaRgg7zWO1CxUdei7vWoPg91Lz2aYavh9.f9q0e4bRadue','USER'),
+('admin@csumb.edu', '$2a$10$8cjz47bjbR4Mn8GMg9IZx.vyjhLXR/SKKMSZ9.mP9vpMu0ssKi8GW' , 'ADMIN');

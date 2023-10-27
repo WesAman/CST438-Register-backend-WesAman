@@ -33,3 +33,10 @@ CREATE TABLE enrollment (
   FOREIGN KEY (course_id) REFERENCES course (course_id) on delete cascade, 
   FOREIGN KEY (student_id) REFERENCES student (student_id) on delete cascade 
 );
+
+CREATE TABLE user_table (
+id int PRIMARY KEY AUTO_INCREMENT,
+username varchar(25) UNIQUE,
+password varchar(100),
+role varchar(25)
+);

@@ -1,5 +1,6 @@
 package com.cst438.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,10 +23,14 @@ import com.cst438.domain.EnrollmentRepository;
 import com.cst438.domain.Student;
 import com.cst438.domain.StudentDTO;
 import com.cst438.domain.StudentRepository;
+import com.cst438.domain.User;
+import com.cst438.domain.UserRepository;
 
 @RestController
 @CrossOrigin 
 public class StudentController {
+	@Autowired
+	UserRepository userRepository;
 	
 	@Autowired
 	StudentRepository studentRepository;
@@ -34,14 +39,23 @@ public class StudentController {
 	EnrollmentRepository enrollmentRepository;
 	
 	@GetMapping("/student")
-	public StudentDTO[] getStudents() {
-		Iterable<Student> list = studentRepository.findAll();
-		ArrayList<StudentDTO> alist = new ArrayList<>();
-		for (Student s : list) {
-			StudentDTO sdto = new StudentDTO(s.getStudent_id(), s.getName(), s.getEmail(), s.getStatusCode(), s.getStatus());
-			alist.add(sdto);
-		}
-		return alist.toArray(new StudentDTO[alist.size()]);
+	public StudentDTO[] getStudents(Principal principal) {
+	    User user = userRepository.findByUsername(principal.getName());
+	    if (user != null) {
+	        if (user.getRole().equals("ADMIN")) {
+	            Iterable<Student> list = studentRepository.findAll();
+	            ArrayList<StudentDTO> alist = new ArrayList<>();
+	            for (Student s : list) {
+	                StudentDTO sdto = new StudentDTO(s.getStudent_id(), s.getName(), s.getEmail(), s.getStatusCode(), s.getStatus());
+	                alist.add(sdto);
+	            }
+	            return alist.toArray(new StudentDTO[alist.size()]);
+	        } else {
+	            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Access denied for user with role: " + user.getRole());
+	        }
+	    } else {
+	        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not found.");
+	    }
 	}
 	
 	@GetMapping("/student/{id}")
